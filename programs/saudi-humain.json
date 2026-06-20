@@ -1,0 +1,19 @@
+{
+  "program_id": "sc-saudi-humain",
+  "country": "Saudi Arabia",
+  "program_name": "HUMAIN sovereign AI buildout",
+  "announced_gw": 6.0,
+  "announced_horizon_year": 2030,
+  "announced_accelerator_count": 600000,
+  "announced_funding_usd": 30000000000,
+  "references": [
+    "https://humain.ai/",
+    "https://www.pif.gov.sa/",
+    "https://www.mcit.gov.sa/"
+  ],
+  "silicon_gw": 2.1,
+  "power_gw": 3.2,
+  "water_gw": 1.6,
+  "talent_gw": 2.0
+}
+

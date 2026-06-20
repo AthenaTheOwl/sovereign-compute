@@ -1,0 +1,19 @@
+{
+  "program_id": "sc-uae-g42",
+  "country": "United Arab Emirates",
+  "program_name": "G42 AI compute expansion",
+  "announced_gw": 5.0,
+  "announced_horizon_year": 2030,
+  "announced_accelerator_count": 500000,
+  "announced_funding_usd": 25000000000,
+  "references": [
+    "https://www.g42.ai/",
+    "https://ai.gov.ae/",
+    "https://www.mubadala.com/"
+  ],
+  "silicon_gw": 2.3,
+  "power_gw": 2.8,
+  "water_gw": 1.9,
+  "talent_gw": 2.4
+}
+

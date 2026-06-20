@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://athena.dev/sovereign-compute/scorecard.schema.json",
+  "title": "SovereignCompute scorecard row",
+  "type": "object",
+  "required": [
+    "program_id",
+    "country",
+    "program_name",
+    "announced_gw",
+    "projected_real_gw",
+    "feasibility_ratio",
+    "binding_constraint",
+    "multiple_binding",
+    "axis_results",
+    "references"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "program_id": {"type": "string"},
+    "country": {"type": "string"},
+    "program_name": {"type": "string"},
+    "announced_gw": {"type": "number", "minimum": 0},
+    "projected_real_gw": {"type": "number", "minimum": 0},
+    "feasibility_ratio": {"type": "number", "minimum": 0, "maximum": 1},
+    "binding_constraint": {"type": "string"},
+    "multiple_binding": {"type": "boolean"},
+    "axis_results": {"type": "array", "minItems": 4},
+    "references": {"type": "array", "minItems": 3, "items": {"type": "string", "format": "uri"}}
+  }
+}
+

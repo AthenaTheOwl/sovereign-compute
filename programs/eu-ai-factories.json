@@ -1,0 +1,19 @@
+{
+  "program_id": "sc-eu-ai-factories",
+  "country": "European Union",
+  "program_name": "AI Factories program",
+  "announced_gw": 2.0,
+  "announced_horizon_year": 2028,
+  "announced_accelerator_count": 120000,
+  "announced_funding_usd": 8000000000,
+  "references": [
+    "https://eurohpc-ju.europa.eu/",
+    "https://digital-strategy.ec.europa.eu/",
+    "https://commission.europa.eu/"
+  ],
+  "silicon_gw": 1.2,
+  "power_gw": 1.4,
+  "water_gw": 1.5,
+  "talent_gw": 1.1
+}
+

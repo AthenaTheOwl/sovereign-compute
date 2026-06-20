@@ -1,0 +1,19 @@
+{
+  "program_id": "sc-indiaai",
+  "country": "India",
+  "program_name": "IndiaAI compute capacity",
+  "announced_gw": 1.5,
+  "announced_horizon_year": 2027,
+  "announced_accelerator_count": 100000,
+  "announced_funding_usd": 1200000000,
+  "references": [
+    "https://indiaai.gov.in/",
+    "https://www.meity.gov.in/",
+    "https://pib.gov.in/"
+  ],
+  "silicon_gw": 0.8,
+  "power_gw": 1.1,
+  "water_gw": 1.0,
+  "talent_gw": 0.9
+}
+

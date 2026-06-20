@@ -1,0 +1,19 @@
+{
+  "program_id": "sc-uk-aisi",
+  "country": "United Kingdom",
+  "program_name": "AI Safety Institute compute reserve",
+  "announced_gw": 0.8,
+  "announced_horizon_year": 2027,
+  "announced_accelerator_count": 45000,
+  "announced_funding_usd": 900000000,
+  "references": [
+    "https://www.aisi.gov.uk/",
+    "https://www.gov.uk/government/organisations/department-for-science-innovation-and-technology",
+    "https://www.gov.uk/government/publications/national-ai-strategy"
+  ],
+  "silicon_gw": 0.55,
+  "power_gw": 0.65,
+  "water_gw": 0.70,
+  "talent_gw": 0.50
+}
+
