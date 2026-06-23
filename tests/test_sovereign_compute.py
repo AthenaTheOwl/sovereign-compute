@@ -47,3 +47,21 @@ def test_scorecard_jsonl_has_ranked_rows() -> None:
     ratios = [row["feasibility_ratio"] for row in rows]
     assert ratios == sorted(ratios, reverse=True)
 
+
+def test_show_default_command_is_readable() -> None:
+    result = subprocess.run(
+        [sys.executable, "-m", "sovereign_compute"],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    out = result.stdout
+    assert "feasibility" in out
+    assert "phantom GW" in out
+    assert "binding" in out
+    # ranked table: highest-ratio program (UK, rank 1) appears before lowest (Saudi, rank 5)
+    assert out.index("United Kingdom") < out.index("Saudi Arabia")
+    # not a raw JSON dump
+    assert not out.lstrip().startswith("{")
+

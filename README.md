@@ -32,16 +32,45 @@ teams, World Bank / IMF advisors to emerging-market AI strategies.
 ## Status
 
 
-v0.1 shipped and runs end to end. The entry command `python sovereign_compute.py scorecard` runs. See `specs/0002-design/` for the v0.1 scope and `STATUS.md` (where present) for the current state and next-feature queue.
+v0.1 shipped and runs end to end. `python -m sovereign_compute` shows the
+committed scorecard; `python -m sovereign_compute scorecard` regenerates the
+report and JSONL from the five program fixtures in `programs/`.
+
+## try it
+
+No arguments. Reads the committed `data/scorecards/2026q2.jsonl` and prints a
+ranked summary, offline and read-only:
+
+```
+$ python -m sovereign_compute
+sovereign AI compute feasibility - 2026q2
+5 national programs scored on silicon / power / water / talent
+
+rank program                            announced   real    gap binding
+1    United Kingdom: AI Safety Instit..     0.80G  0.50  0.30 talent
+2    European Union: AI Factories pro..     2.00G  1.10  0.90 talent
+3    India: IndiaAI compute capacity        1.50G  0.80  0.70 silicon
+4    United Arab Emirates: G42 AI com..     5.00G  1.90  3.10 water
+5    Saudi Arabia: HUMAIN sovereign A..     6.00G  1.60  4.40 water
+
+announced across all programs : 15.30 GW
+projected real capacity       : 5.90 GW
+phantom GW (announced - real) : 9.40 GW (61% of announced)
+
+weakest program : Saudi Arabia: HUMAIN sovereign AI buildout (27% of announced is feasible, binding on water)
+most common binding constraint : talent (2 of 5 programs)
+```
+
+The phantom-GW line is the point: across five announced national build-outs,
+61% of the headline gigawatts disappear once silicon, power, water, and talent
+limits are applied, and the table shows which constraint binds each program.
 
 ## How to run
 
-Placeholder. After implementation lands:
-
 ```bash
-uv run sovereign-compute scorecard \
-  --programs programs/ \
-  --out reports/2026-Q3-scorecard.md
+python -m sovereign_compute            # show the committed scorecard (default)
+python -m sovereign_compute scorecard  # regenerate the report + JSONL from fixtures
+python -m sovereign_compute validate   # check committed scorecards stay within bounds
 ```
 
 ## Layout
