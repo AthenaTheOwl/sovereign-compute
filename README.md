@@ -31,11 +31,8 @@ teams, World Bank / IMF advisors to emerging-market AI strategies.
 
 ## Status
 
-v0 scaffold. No implementation. The repo holds the README, the
-license, the agents contract, the foundation spec, and the literal
-first PR plan. The first runnable PR after this scaffold lands the
-program schema and the feasibility-axis stubs against one fixture
-program.
+
+v0.1 shipped and runs end to end. The entry command `python sovereign_compute.py scorecard` runs. See `specs/0002-design/` for the v0.1 scope and `STATUS.md` (where present) for the current state and next-feature queue.
 
 ## How to run
 
