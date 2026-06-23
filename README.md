@@ -65,6 +65,24 @@ The phantom-GW line is the point: across five announced national build-outs,
 61% of the headline gigawatts disappear once silicon, power, water, and talent
 limits are applied, and the table shows which constraint binds each program.
 
+## live demo
+
+an interactive Streamlit page that wraps the same `show` result: ranked
+programs, the phantom-GW headline, and per-axis detail. it reads the committed
+`data/scorecards/2026q2.jsonl` directly — no network, no secrets.
+
+local:
+
+```bash
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
+
+deploy on Streamlit Community Cloud -> New app -> repo
+`AthenaTheOwl/sovereign-compute`, branch `main`, main file `streamlit_app.py`.
+
+<!-- live url: https://<your-app>.streamlit.app -->
+
 ## How to run
 
 ```bash
