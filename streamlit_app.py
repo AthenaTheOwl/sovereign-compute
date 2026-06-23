@@ -126,9 +126,118 @@ with st.expander("per-axis detail (silicon / power / water / talent)"):
         )
         st.caption("references: " + ", ".join(row.get("references", [])))
 
+# ---------------------------------------------------------------------------
+# Run the real feasibility engine live. This is not a viewer — the inputs below
+# build a ProgramSpec and call sovereign_compute.scorecard.aggregate, the same
+# function that produced the committed scorecard. Set announced GW and the four
+# axis caps, watch feasibility and the binding constraint recompute.
+# ---------------------------------------------------------------------------
+st.divider()
+st.subheader("score a program yourself")
+st.caption(
+    "drive the actual feasibility engine — `sovereign_compute.scorecard.aggregate` — "
+    "with your own inputs. announced GW is the headline; the four axis caps are how "
+    "much each constraint can actually deliver. the lowest cap binds."
+)
+
+try:
+    import sys
+
+    sys.path.insert(0, str(REPO / "src"))
+    from sovereign_compute.models import ProgramSpec
+    from sovereign_compute.scorecard import aggregate
+
+    col_a, col_b = st.columns(2)
+    with col_a:
+        announced = st.number_input(
+            "announced GW", min_value=0.1, max_value=50.0, value=5.0, step=0.5,
+            help="headline figure the program announced",
+        )
+        silicon = st.slider(
+            "silicon cap GW", 0.0, float(announced), min(1.0, float(announced)), step=0.1,
+            help="accelerator-supply proxy: how much can actually be stood up",
+        )
+        power = st.slider(
+            "power cap GW", 0.0, float(announced), min(3.0, float(announced)), step=0.1,
+            help="grid-delivery proxy: how much can actually be energized",
+        )
+    with col_b:
+        water = st.slider(
+            "water cap GW", 0.0, float(announced), min(4.0, float(announced)), step=0.1,
+            help="cooling-water proxy: usable campus footprint",
+        )
+        talent = st.slider(
+            "talent cap GW", 0.0, float(announced), min(2.0, float(announced)), step=0.1,
+            help="qualified-operations-staff proxy: ramp speed",
+        )
+
+    program = ProgramSpec(
+        program_id="user-input",
+        country="—",
+        program_name="your program",
+        announced_gw=announced,
+        announced_horizon_year=2030,
+        announced_accelerator_count=0,
+        announced_funding_usd=0.0,
+        references=["https://example/a", "https://example/b", "https://example/c"],
+        silicon_gw=silicon,
+        power_gw=power,
+        water_gw=water,
+        talent_gw=talent,
+    )
+    row = aggregate(program)
+    feasible_pct = round(row.feasibility_ratio * 100)
+    phantom_gw = round(announced - row.projected_real_gw, 2)
+
+    m1, m2, m3 = st.columns(3)
+    m1.metric("projected real", f"{row.projected_real_gw:,.2f} GW")
+    m2.metric("phantom", f"{phantom_gw:,.2f} GW", help="announced minus projected-real")
+    m3.metric("binding constraint", row.binding_constraint)
+
+    if feasible_pct >= 70:
+        st.success(
+            f"{feasible_pct}% feasible — most announced capacity is deliverable. "
+            f"binding axis: {row.binding_constraint}."
+        )
+    elif feasible_pct >= 40:
+        st.warning(
+            f"{feasible_pct}% feasible — meaningful phantom GW. {row.binding_constraint} "
+            f"binds first at {row.projected_real_gw:,.2f} GW."
+        )
+    else:
+        st.error(
+            f"{feasible_pct}% feasible — mostly phantom. {row.binding_constraint} caps "
+            f"delivery at {row.projected_real_gw:,.2f} GW of {announced:,.2f} announced."
+        )
+
+    st.dataframe(
+        [
+            {
+                "axis": a.axis,
+                "projected GW": round(a.projected_real_gw, 2),
+                "conf low": round(a.confidence_low, 3),
+                "conf high": round(a.confidence_high, 3),
+                "rationale": a.rationale_text,
+            }
+            for a in row.axis_results
+        ],
+        use_container_width=True,
+        hide_index=True,
+    )
+    st.caption(
+        "lower any axis cap below the others and watch it become the binding "
+        "constraint — it's the live engine, not a lookup."
+    )
+except Exception as exc:  # pragma: no cover - defensive for cloud import differences
+    st.info(
+        f"interactive scoring needs the package importable ({exc}). "
+        "the committed scorecard above still renders."
+    )
+
 st.caption(
     "v0.1 ships one fixture quarter. the model + scoring live in "
-    "`src/sovereign_compute/`; this page reads the committed "
-    "`data/scorecards/*.jsonl`. screening inputs for review, not policy advice. "
+    "`src/sovereign_compute/`; the table reads the committed "
+    "`data/scorecards/*.jsonl` and the scorer above is the real engine. "
+    "screening inputs for review, not policy advice. "
     "repo: github.com/AthenaTheOwl/sovereign-compute"
 )
