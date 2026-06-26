@@ -1,40 +1,24 @@
-# SovereignCompute
+# sovereign-compute
 
-Decision-support for sovereign AI compute programs. Shows the joint
-silicon-power-water-talent feasibility of every announced national
-AI-infrastructure build-out: UAE G42, Saudi HUMAIN, EU AI factories,
-India IndiaAI Mission, UK AISI, and the others.
+Five governments announced 15.3 gigawatts of sovereign AI capacity. Run the numbers
+against silicon, power, water, and talent and 9.4 of those gigawatts vanish — 61% of
+the headline lives on a press release, not a wire.
 
-## What this is
+## What it does
 
-Every G20 government announced a sovereign-AI compute plan in
-2024-2026. Most are infeasible at announced scale given CoWoS, HBM,
-transformer, and power-grid constraints. Nobody has produced a
-credible cross-country comparison. Programs are mis-allocating
-multi-billion-dollar budgets against schedules the supply chain
-cannot meet.
+Every G20 government has put out a sovereign-AI compute plan since 2024. Most cannot
+be built at the announced scale: CoWoS packaging is rationed, HBM is rationed,
+transformers run years out, and a desert datacenter still needs water it does not
+have. The announcements compete for the same scarce parts, and nobody has put the
+programs in one table to see whose number survives contact with the supply chain.
 
-SovereignCompute is the cross-country feasibility scorecard. The
-first artifact is a public report: "Top 10 Sovereign AI Compute
-Programs — Feasibility Scorecard" with announced GW, projected real
-GW given silicon-power-water-talent inputs, and the binding constraint
-per program.
-
-It composes inputs from sibling repos (GridSilicon for grid-side,
-WaferToWatt for silicon-side, InterconnectAlpha for queue survival,
-RobustSiting for the optimization layer). What it adds is the
-sovereign-program-shape data model and the cross-country comparison.
-
-Buyers: program managers and procurement leads at sovereign AI
-initiatives, defense planners, sovereign wealth fund infrastructure
-teams, World Bank / IMF advisors to emerging-market AI strategies.
-
-## Status
-
-
-v0.1 shipped and runs end to end. `python -m sovereign_compute` shows the
-committed scorecard; `python -m sovereign_compute scorecard` regenerates the
-report and JSONL from the five program fixtures in `programs/`.
+sovereign-compute is that table. It takes a national program, scores its announced
+capacity against four binding inputs — silicon, power, water, talent — and prints the
+real gigawatts left over plus the one constraint that kills the rest. The UAE's G42
+program loses 3.1 GW to water. Saudi HUMAIN loses 4.4 the same way, down to 27% of
+what it announced. The UK and EU don't run out of grid or chips; they run out of
+people. The program-shape data model and the cross-country comparison are the work
+here. The per-axis numbers come from the sibling repos.
 
 ## try it
 
@@ -67,8 +51,8 @@ limits are applied, and the table shows which constraint binds each program.
 
 ## live demo
 
-an interactive Streamlit page that wraps the same `show` result: ranked
-programs, the phantom-GW headline, and per-axis detail. it reads the committed
+An interactive Streamlit page wrapping the same `show` result: ranked programs, the
+phantom-GW headline, and per-axis detail. It reads the committed
 `data/scorecards/2026q2.jsonl` directly — no network, no secrets.
 
 local:
@@ -82,6 +66,20 @@ deploy on Streamlit Community Cloud -> New app -> repo
 `AthenaTheOwl/sovereign-compute`, branch `main`, main file `streamlit_app.py`.
 
 <!-- live url: https://<your-app>.streamlit.app -->
+
+## How it connects
+
+sovereign-compute sits on top of the per-axis models. It pulls their numbers and adds
+the program shape and the country-by-country comparison.
+
+- [grid-silicon](https://github.com/AthenaTheOwl/grid-silicon) — the power axis:
+  announced-vs-energized megawatts on the actual grid.
+- [wafer-to-watt](https://github.com/AthenaTheOwl/wafer-to-watt) — the silicon axis:
+  how many of the announced chips the packaging line can actually deliver.
+- [interconnect-alpha](https://github.com/AthenaTheOwl/interconnect-alpha) — queue
+  survival: the odds a queued project ever reaches commercial operation.
+- [robust-siting-lab](https://github.com/AthenaTheOwl/robust-siting-lab) — the
+  optimization layer for where the capacity should actually go.
 
 ## How to run
 
@@ -115,8 +113,8 @@ Downstream additions:
   src/sovereign_compute/
     program/loader.py
     program/schema.py
-    feasibility/silicon.py        # consumes WaferToWatt-style data
-    feasibility/power.py          # consumes GridSilicon-style data
+    feasibility/silicon.py        # consumes wafer-to-watt-style data
+    feasibility/power.py          # consumes grid-silicon-style data
     feasibility/water.py
     feasibility/talent.py
     scorecard/aggregate.py
