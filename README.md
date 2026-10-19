@@ -49,6 +49,11 @@ The phantom-GW line is the point: across five announced national build-outs,
 61% of the headline gigawatts disappear once silicon, power, water, and talent
 limits are applied, and the table shows which constraint binds each program.
 
+The 5.90 GW "projected real capacity" is the sum of each program's standalone
+binding-axis minimum, not a total that could be built simultaneously: programs that
+draw on the same scarce supply can't all claim it at once. See the
+[shared-resource caveat](docs/axis-screen-interpretation.md).
+
 ## live demo
 
 An interactive Streamlit page wrapping the same `show` result: ranked programs, the
