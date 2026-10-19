@@ -147,3 +147,7 @@ Downstream additions:
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+## Method update
+
+[October method update: The minimum axis is a conditional capacity screen](docs/axis-screen-interpretation.md).
