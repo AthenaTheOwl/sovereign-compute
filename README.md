@@ -144,10 +144,10 @@ Downstream additions:
     sanity_bounds.py              # no program > 100% of announced
 ```
 
-## License
-
-MIT. See [LICENSE](LICENSE).
-
 ## Method update
 
 [October method update: The minimum axis is a conditional capacity screen](docs/axis-screen-interpretation.md).
+
+## License
+
+MIT. See [LICENSE](LICENSE).
