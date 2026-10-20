@@ -56,7 +56,14 @@ phantom_pct = (phantom / total_announced * 100) if total_announced else 0
 
 c1, c2, c3 = st.columns(3)
 c1.metric("announced", f"{total_announced:,.2f} GW")
-c2.metric("projected real", f"{total_projected:,.2f} GW")
+c2.metric(
+    "projected real",
+    f"{total_projected:,.2f} GW",
+    help=(
+        "sum of each program's standalone binding-axis minimum; programs sharing "
+        "scarce supply can't all reach it at once (see docs/axis-screen-interpretation.md)"
+    ),
+)
 c3.metric(
     "phantom",
     f"{phantom:,.2f} GW",

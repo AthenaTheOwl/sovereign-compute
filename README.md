@@ -31,6 +31,7 @@ sovereign AI compute feasibility - 2026q2
 5 national programs scored on silicon / power / water / talent
 
 rank program                            announced   real    gap binding
+---- ---------------------------------- --------- ------ ------ --------
 1    United Kingdom: AI Safety Instit..     0.80G  0.50  0.30 talent
 2    European Union: AI Factories pro..     2.00G  1.10  0.90 talent
 3    India: IndiaAI compute capacity        1.50G  0.80  0.70 silicon
@@ -48,6 +49,11 @@ most common binding constraint : talent (2 of 5 programs)
 The phantom-GW line is the point: across five announced national build-outs,
 61% of the headline gigawatts disappear once silicon, power, water, and talent
 limits are applied, and the table shows which constraint binds each program.
+
+The 5.90 GW "projected real capacity" adds up each program's standalone
+binding-axis minimum. Programs that draw on the same scarce supply can't all claim
+it at once, so the total buildable at the same time may be lower. See the
+[shared-resource caveat](docs/axis-screen-interpretation.md).
 
 ## live demo
 
@@ -105,6 +111,7 @@ sovereign-compute/
       acceptance.md
   docs/
     first-pr.md
+    axis-screen-interpretation.md  # method note: minimum axis as a conditional screen
 ```
 
 Downstream additions:
@@ -144,10 +151,10 @@ Downstream additions:
     sanity_bounds.py              # no program > 100% of announced
 ```
 
-## License
-
-MIT. See [LICENSE](LICENSE).
-
 ## Method update
 
 [October method update: The minimum axis is a conditional capacity screen](docs/axis-screen-interpretation.md).
+
+## License
+
+MIT. See [LICENSE](LICENSE).
